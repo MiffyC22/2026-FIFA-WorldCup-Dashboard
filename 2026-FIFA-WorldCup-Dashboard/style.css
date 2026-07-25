@@ -1,0 +1,583 @@
+/*==================================================
+2026 FIFA World Cup Dashboard V8 Final
+Python Data Analysis + JavaScript Visualization
+==================================================*/
+
+/*==========================
+Reset
+==========================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Noto Sans TC",sans-serif;
+
+    background:#F4F6F8;
+
+    color:#333;
+
+    line-height:1.6;
+
+}
+
+
+/*==========================
+Header
+==========================*/
+
+header{
+
+    background:#2A398D;
+
+    color:white;
+
+    text-align:center;
+
+    padding:30px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+
+}
+
+header h1{
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+header p{
+
+    font-size:22px;
+
+    opacity:.9;
+
+}
+
+
+/*==========================
+控制面板
+==========================*/
+
+.control-panel{
+
+    width:95%;
+
+    max-width:1200px;
+
+    margin:25px auto;
+
+    display:flex;
+
+    gap:20px;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+}
+
+.control-box{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    min-width:220px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.control-box:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.control-box label{
+
+    display:block;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+
+    color:#2A398D;
+
+}
+
+.control-box select{
+
+    width:100%;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    border:1px solid #CCC;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+
+/*==========================
+Card
+==========================*/
+
+.card{
+
+    width:95%;
+
+    max-width:1200px;
+
+    margin:25px auto;
+
+    background:white;
+
+    border-radius:14px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    padding:25px;
+
+}
+
+.card-title{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#2A398D;
+
+    margin-bottom:18px;
+
+}
+
+
+/*==========================
+Mirror Bar
+==========================*/
+
+#mirrorTitle{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:8px;
+
+    padding:0 15px;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#222;
+
+}
+
+#teamALabel{
+
+    color:#E61D25;
+
+}
+
+#teamBLabel{
+
+    color:#2A398D;
+
+}
+
+
+/*==========================
+Mirror Legend
+==========================*/
+
+.mirrorLegend{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-bottom:12px;
+
+    flex-wrap:wrap;
+
+    font-size:11px;
+
+}
+
+.legendWin{
+
+    color:#E61D25;
+
+}
+
+.legendLose{
+
+    color:#2A398D;
+
+}
+
+.legendDraw{
+
+    color:#3CAC3B;
+
+}
+
+
+/*==========================
+Canvas
+==========================*/
+
+#mirrorChart{
+
+    width:100%!important;
+
+    height:650px!important;
+
+    background:white;
+
+    border-radius:15px;
+
+}
+
+
+/*==================================================
+ V8 FINAL Part 7
+
+ Ranking Table Ultimate
+
+==================================================*/
+
+
+/*========================
+排行榜容器
+========================*/
+
+#rankingTable{
+
+    width:95%;
+
+    max-width:900px;
+
+    margin:30px auto;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+
+}
+
+
+
+/*========================
+排行榜標題
+========================*/
+
+
+#rankingTable th{
+
+
+    background:#005A93;
+
+    color:white;
+
+    font-size:16px;
+
+    padding:12px;
+
+    text-align:center;
+
+
+}
+
+
+
+
+/*========================
+排行榜內容
+========================*/
+
+
+#rankingTable td{
+
+
+    padding:10px;
+
+    text-align:center;
+
+    font-size:15px;
+
+    border-bottom:1px solid #eeeeee;
+
+
+}
+
+
+
+
+/*排名欄*/
+
+#rankingTable td.rank{
+
+
+    width:80px;
+
+    font-weight:bold;
+
+
+}
+
+
+
+/*========================
+Hover效果
+========================*/
+
+
+#rankingTable tbody tr:hover{
+
+
+    background:#f5f9fc;
+
+
+}
+
+
+
+/*========================
+選中球隊 Highlight
+
+由JS控制背景色
+========================*/
+
+
+#rankingTable tbody tr[style*="FFF3BF"]{
+
+
+    box-shadow:
+
+    inset 4px 0 0 #FFD43B;
+
+
+}
+
+
+
+/*========================
+Mirror Chart區域
+
+固定高度避免跳動
+========================*/
+
+
+#mirrorChart{
+
+
+    width:100%;
+
+    min-height:520px;
+
+
+}
+
+
+
+
+
+/*========================
+手機版
+========================*/
+
+
+@media(max-width:768px){
+
+
+
+    #rankingTable{
+
+
+        width:98%;
+
+
+    }
+
+
+
+
+    #rankingTable th{
+
+
+        font-size:14px;
+
+
+        padding:8px;
+
+
+    }
+
+
+
+    #rankingTable td{
+
+
+        font-size:13px;
+
+
+        padding:8px;
+
+
+    }
+
+
+
+    #mirrorChart{
+
+
+        min-height:420px;
+
+
+    }
+
+
+}
+
+
+
+/*========================
+小螢幕
+========================*/
+
+
+@media(max-width:480px){
+
+
+
+    #rankingTable{
+
+
+        font-size:12px;
+
+
+    }
+
+
+
+
+    #rankingTable td.rank{
+
+
+        width:40px;
+
+
+    }
+
+
+
+}
+
+
+/*==========================
+Footer
+==========================*/
+
+footer{
+
+    text-align:center;
+
+    margin:40px 0;
+
+    color:#666;
+
+    font-size:14px;
+
+}
+
+
+/*==========================
+RWD
+==========================*/
+
+@media(max-width:900px){
+
+    header h1{
+
+        font-size:28px;
+
+    }
+
+    #mirrorChart{
+
+        height:700px!important;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .control-panel{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .control-box{
+
+        width:100%;
+
+    }
+
+    #mirrorChart{
+
+        height:430px!important;
+
+    }
+
+    canvas{
+
+        height:430px!important;
+
+    }
+
+    .mirrorLegend{
+
+        justify-content:center;
+
+    }
+
+}

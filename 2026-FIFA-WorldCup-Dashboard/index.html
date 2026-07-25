@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>2026 FIFA World Cup Dashboard V8 Final</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="data:,">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.js"></script>
+
+    <!-- ChartDataLabels -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+
+</head>
+
+<body>
+
+<!--============================
+Header
+=============================-->
+
+<header>
+
+    <h1>
+
+        ⚽ 2026 FIFA World Cup Dashboard
+
+    </h1>
+
+    <p>
+
+        淘汰賽戰力分析與勝率預測系統
+
+    </p>
+
+</header>
+
+
+<!--============================
+控制區
+=============================-->
+
+<section class="control-panel">
+
+    <!-- 比賽階段 -->
+
+    <div class="control-box">
+
+        <label>
+
+            比賽階段
+
+        </label>
+
+        <select id="sheetSelect">
+
+        </select>
+
+    </div>
+
+    <!-- 國家A -->
+
+    <div class="control-box">
+
+        <label>
+
+            國家 A
+
+        </label>
+
+        <select id="teamA">
+
+        </select>
+
+    </div>
+
+    <!-- 國家B -->
+
+    <div class="control-box">
+
+        <label>
+
+            國家 B
+
+        </label>
+
+        <select id="teamB">
+
+        </select>
+
+    </div>
+
+</section>
+
+
+<!--============================
+Mirror Bar
+=============================-->
+
+<section class="card">
+
+    <div class="card-title">
+
+        ⚔ 戰力比較 (Mirror Bar)
+
+    </div>
+
+    <div id="mirrorTitle">
+
+        <span id="teamALabel"></span>
+
+        <span id="teamBLabel"></span>
+
+    </div>
+
+    <!-- 顏色說明 -->
+
+    <div class="mirrorLegend">
+
+        <span class="legendWin">
+
+            ● 加拿大紅：能力較高
+
+        </span>
+
+        <span class="legendLose">
+
+            ● 美國藍：能力較低
+
+        </span>
+
+        <span class="legendDraw">
+
+            ● 墨西哥綠：能力相同
+
+        </span>
+
+    </div>
+
+    <canvas id="mirrorChart"></canvas>
+
+</section>
+
+
+<!--============================
+排行榜
+=============================-->
+
+<section class="card">
+
+    <div class="card-title">
+
+        🏆 綜合戰力排行榜
+
+    </div>
+
+    <table id="rankingTable">
+
+        <thead>
+
+            <tr>
+
+                <th>排名</th>
+
+                <th>國家</th>
+
+                <th>綜合戰力</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+</section>
+
+
+<!--============================
+Footer
+=============================-->
+
+<footer>
+
+    2026 FIFA World Cup Dashboard V8 Final
+
+    <br>
+
+    Python (Pandas + NumPy) ｜ JSON ｜ Chart.js
+
+</footer>
+
+
+<!--============================
+JavaScript
+=============================-->
+
+<!-- SheetJS -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<!-- Your App -->
+<script src="app.js"></script>
+
+</body>
+
+</html>
